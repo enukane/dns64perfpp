@@ -37,6 +37,9 @@
 #include <stdint.h>
 #include <string>
 #include <vector>
+#ifdef __APPLE__
+#include <sys/time.h>
+#endif
 
 static const size_t UDP_MAX_LEN = 512;
 static const char *dns64_addr_format_string = "%03hhu-%03hhu-%03hhu-%03hhu";

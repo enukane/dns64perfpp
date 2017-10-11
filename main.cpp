@@ -130,8 +130,12 @@ int main(int argc, char *argv[]) {
   try {
     for (uint32_t i = 0; i < num_thread; i++) {
       threads.emplace_back([&, i]() { testers[i]->start(); });
+#ifdef __APPLE__
+      pthread_setname_np(("Receiver " + std::to_string(i)).c_str());
+#else
       pthread_setname_np(threads.back().native_handle(),
                          ("Receiver " + std::to_string(i)).c_str());
+#endif
     }
     for (uint32_t i = 0; i < num_thread; i++) {
       threads[i].join();

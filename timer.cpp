@@ -93,7 +93,11 @@ Timer::~Timer() {
 
 void Timer::start() {
   thread_ = std::thread{&Timer::run, this};
+#ifdef __APPLE__
+  pthread_setname_np(thread_name_.c_str());
+#else
   pthread_setname_np(thread_.native_handle(), thread_name_.c_str());
+#endif
 }
 
 void Timer::stop() {

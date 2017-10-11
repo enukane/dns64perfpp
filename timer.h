@@ -30,6 +30,9 @@
 #include <chrono>
 #include <functional>
 #include <thread>
+#ifdef __APPLE__
+#include <string>
+#endif
 
 /**
  * Class to represent a generic, function execution time corrected timer.
